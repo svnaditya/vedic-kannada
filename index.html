@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kannada Vedic Keyboard</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Modern, clean CSS styling */
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 850px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #1a73e8;
+            margin-top: 0;
+        }
+
+        /* The main typing area */
+        textarea {
+            width: 100%;
+            height: 150px;
+            font-size: 28px; /* Large font for easy reading */
+            font-family: 'Noto Sans Kannada', sans-serif;
+            padding: 15px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            resize: vertical;
+            line-height: 1.5;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #1a73e8;
+            box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.2);
+        }
+
+        /* Control Buttons */
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .btn-group button {
+            font-size: 16px;
+            padding: 10px 24px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .btn-copy { background-color: #1a73e8; color: white; }
+        .btn-copy:hover { background-color: #1557b0; }
+        
+        .btn-clear { background-color: #f1f3f4; color: #3c4043; border: 1px solid #dadce0; }
+        .btn-clear:hover { background-color: #e8eaed; }
+
+        #copymes {
+            color: #1e8e3e;
+            font-weight: bold;
+            display: none;
+        }
+
+        /* On-Screen Keyboard Styling */
+        .keyboard-section { margin-top: 30px; }
+        .keyboard-title { font-size: 14px; color: #666; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #eee; padding-bottom: 5px; margin-bottom: 15px;}
+        .keyboard-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .key {
+            font-size: 22px;
+            font-family: 'Noto Sans Kannada', sans-serif;
+            background-color: #f8f9fa;
+            border: 1px solid #dadce0;
+            border-radius: 6px;
+            padding: 10px 15px;
+            cursor: pointer;
+            color: #d93025;
+            transition: background 0.1s;
+            min-width: 45px;
+            text-align: center;
+        }
+
+        .key:hover {
+            background-color: #fff3e0;
+            color: #1a73e8;
+            border-color: #f29900;
+        }
+
+        /* Instructions Block */
+        .guide {
+            background-color: #e8f0fe;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .guide code {
+            background: #d2e3fc;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #1a73e8;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Kannada Vedic Keyboard</h1>
+        
+        <textarea id="bar" autofocus autocomplete="off" spellcheck="false" placeholder="Type here..."></textarea>
+        
+        <div class="controls">
+            <div class="btn-group">
+                <button class="btn-copy" onclick="copy()">Copy to Clipboard</button>
+                <button class="btn-clear" onclick="clearText()">Clear</button>
+            </div>
+            <span id="copymes">✔ Copied!</span>
+        </div>
+
+        <div class="keyboard-section">
+            <div class="keyboard-title">Vedic Accents & Special Marks</div>
+            <div class="keyboard-grid">
+                <button class="key" onclick="alfa('॒')" title="Anudatta (type _)">◌॒</button>
+                <button class="key" onclick="alfa('॑')" title="Swarita (type +)">◌॑</button>
+                <button class="key" onclick="alfa('᳚')" title="Dirgha Swarita (type ++)">◌᳚</button>
+                <button class="key" onclick="alfa('ಂ')" title="Anusvara (type M)">ಂ</button>
+                <button class="key" onclick="alfa('ಃ')" title="Visarga (type H)">ಃ</button>
+                <button class="key" onclick="alfa('ಽ')" title="Avagraha (type ')">ಽ</button>
+                <button class="key" onclick="alfa('।')" title="Danda (type /)">।</button>
+                <button class="key" onclick="alfa('॥')" title="Double Danda (type //)">॥</button>
+                <button class="key" onclick="alfa('\u0CCD')" title="Virama/Halant">್</button>
+                <button class="key" onclick="alfa('ಁ')" title="Candrabindu (type MM)">ಁ</button>
+            </div>
+        </div>
+
+        <div class="guide">
+            <strong>How to type vedic accents with your physical keyboard:</strong>
+            <ul>
+                <li>Type <code>_</code> (underscore) for Anudatta (ಕ॒)</li>
+                <li>Type <code>+</code> (plus) for Swarita (ಕ॑)</li>
+                <li>Type <code>++</code> (two pluses) for Dirgha Swarita (ಕ᳚)</li>
+                <li>Type <code>M</code> (capital M) for Anusvara (ಕಂ)</li>
+                <li>Type <code>H</code> (capital H) for Visarga (ಕಃ)</li>
+                <li>Type <code>MM</code> (two capital M's) for Candrabindu (ಕಁ)</li>
+            </ul>
+        </div>
+
+        <div class="guide">
+            <h3 style="margin-top: 0; color: #1a73e8;">Typing Guide</h3>
+            <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+                
+                <div style="flex: 1; min-width: 180px;">
+                    <strong>Vowels & Specials</strong>
+                    <ul style="margin-top: 5px; padding-left: 20px; font-size: 13px;">
+                        <li>Long: Type twice (<code>aa</code> = <strong>ಆ</strong>)</li>
+                        <li><code>ai</code> = <strong>ಐ</strong> | <code>au</code> = <strong>ಔ</strong></li>
+                        <li><code>-r</code> = <strong>ಋ</strong> | <code>-l</code> = <strong>ಌ</strong></li>
+                        <li><code>M</code> = Anusvara (<strong>ಂ</strong>)</li>
+                        <li><code>MM</code> = Candrabindu (<strong>ಁ</strong>)</li>
+                        <li><code>H</code> = Visarga (<strong>ಃ</strong>)</li>
+                    </ul>
+                </div>
+
+                <div style="flex: 1; min-width: 180px;">
+                    <strong>Consonants</strong>
+                    <ul style="margin-top: 5px; padding-left: 20px; font-size: 13px;">
+                        <li>Shift for retroflex: <code>T</code>(<strong>ಟ್</strong>), <code>D</code>(<strong>ಡ್</strong>), <code>N</code>(<strong>ಣ್</strong>), <code>L</code>(<strong>ಳ್</strong>)</li>
+                        <li>Add <code>h</code> for aspirated: <code>kh</code> (<strong>ಖ್</strong>), <code>bh</code> (<strong>ಭ್</strong>)</li>
+                        <li><code>sh</code> = <strong>ಶ್</strong> | <code>S</code> = <strong>ಷ್</strong> | <code>s</code> = <strong>ಸ್</strong></li>
+                    </ul>
+                </div>
+
+                <div style="flex: 1; min-width: 180px;">
+                    <strong>Special Conjuncts</strong>
+                    <ul style="margin-top: 5px; padding-left: 20px; font-size: 13px;">
+                        <li><code>kSa</code> = <strong>ಕ್ಷ</strong></li>
+                        <li><code>jJa</code> = <strong>ಜ್ಞ</strong></li>
+                        <li><code>tra</code> = <strong>ತ್ರ</strong></li>
+                        <li><code>shra</code> = <strong>ಶ್ರ</strong></li>
+                        <li><em>Other Ottakshara:</em> Type back-to-back (<code>kka</code> = <strong>ಕ್ಕ</strong>)</li>
+                    </ul>
+                </div>
+
+                <div style="flex: 1; min-width: 160px;">
+                    <strong>Vedic Accents</strong>
+                    <ul style="margin-top: 5px; padding-left: 20px; font-size: 13px;">
+                        <li><code>_</code> for Anudatta (<strong>ಕ॒</strong>)</li>
+                        <li><code>+</code> for Swarita (<strong>ಕ॑</strong>)</li>
+                        <li><code>++</code> for Dirgha Swarita (<strong>ಕ᳚</strong>)</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="car_kan.js"></script>
+
+    <script>
+        // Function for the on-screen buttons
+        function alfa(char) {
+            const textarea = document.getElementById("bar");
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const text = textarea.value;
+            
+            // Insert the character exactly where the cursor is
+            textarea.value = text.substring(0, start) + char + text.substring(end);
+            textarea.selectionStart = textarea.selectionEnd = start + char.length;
+            textarea.focus();
+            
+            // Crucial step: tell car_kan.js that the text changed so it can process it
+            textarea.dispatchEvent(new Event('input'));
+        }
+
+        // Function to clear the text area
+        function clearText() {
+            const textarea = document.getElementById("bar");
+            textarea.value = '';
+            textarea.focus();
+        }
+    </script>
+</body>
+</html>
