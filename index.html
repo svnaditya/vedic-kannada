@@ -8,6 +8,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Kannada:wght@400;600&display=swap" rel="stylesheet">
 
     <style>
+        *, *::before, *::after { box-sizing: border-box; }
+
+        html {
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+
         body {
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background-color: #f0f2f5;
@@ -130,6 +137,10 @@
             color: #d93025;
             transition: background 0.1s;
             text-align: center;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-user-select: none;
+            user-select: none;
+            touch-action: manipulation;
         }
 
         .key:hover {
@@ -156,6 +167,43 @@
             border-radius: 4px;
             font-weight: bold;
             color: #1a73e8;
+        }
+
+        /* ---------- Mobile: uniform key grid ---------- */
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .container { padding: 16px; }
+            h1 { font-size: 1.5em; }
+
+            /* The empty <div class="keycell"></div> spacers and the row breaks
+               are only for desktop column alignment. On phones they leave odd
+               blank gaps, so drop them and let the keys flow into a clean grid. */
+            .keycell:empty { display: none; }
+            .row-break { display: none; }
+
+            .keyboard-grid { gap: 6px; }
+
+            /* 6 equal columns that fill the available width */
+            .keycell {
+                width: auto;
+                flex: 0 0 calc((100% - 30px) / 6);
+            }
+            .key { font-size: 20px; padding: 9px 0; }
+            .keycell .lbl { font-size: 10px; }
+
+            /* Wide (Vedic / special) keys: 3 per row, filling the width */
+            .key.wide {
+                width: auto;
+                flex: 1 1 calc((100% - 12px) / 3);
+                padding-left: 6px;
+                padding-right: 6px;
+            }
+        }
+
+        /* ---------- Very small phones: 5 columns ---------- */
+        @media (max-width: 360px) {
+            .keycell { flex-basis: calc((100% - 24px) / 5); }
+            .key { font-size: 19px; }
         }
     </style>
 </head>
